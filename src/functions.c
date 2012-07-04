@@ -1,3 +1,5 @@
+#include "functions.h"
+
 void
 fine_print(int argc, char* argv[])
 {
@@ -69,3 +71,4 @@ eval(char* list)
 			calls[j](i, tokens);
 	return evaluation;
 }
+

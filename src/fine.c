@@ -1,21 +1,4 @@
 #include "fine.h"
-#define DEBUG 1
-
-int
-main(int argc, char* argv[])
-{
-	if (argc == 1)
-		error(1, 0, "No input files");
-
-	FILE *src_file = fopen(argv[1], "r");
-	if (errno)
-		error(errno, 0, "%s", strerror(errno));
-
-	char* src = filestr(src_file);
-	parse_sexp(src);
-	free(src);
-	return 0;
-}
 
 // Return a string containing the full contents of the specified FILE.
 char*
@@ -56,10 +39,17 @@ parse_sexp(char *src)
 
 		// eval() currently modifies the list in place for the sake of efficiency
 		// but this interferes with reporting, so duplicate it when debugging.
-		eval(DEBUG ? strdup(list) : list);
+#if DEBUG
+                eval(strdup(list));
+#else
+                eval(list);
+#endif
+
 		eval_len = strlen(evaluation);
-		if (DEBUG)
-			debug(src, match[0], list);
+
+#if DEBUG
+		debug(src, match[0], list);
+#endif
 
 		// Iterate over the characters of the list, replacing each of them with
 		// the matching character in the evaluation. When no more characters are
@@ -94,3 +84,4 @@ debug(char* sexp, regmatch_t match, char* list)
 	// "%s\nlist %s found at %d-%d\nevaluated to %s\n---\n",
 	// 	src, list, match.rm_so, match.rm_eo, evaluation);
 }
+

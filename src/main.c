@@ -1,10 +1,10 @@
-#include "app.h"
+#include "main.h"
 
 int
 main(int argc, char* argv[])
 {
 	if (argc == 1)
-		error(1, 0, "No input files");
+		interactive(); // No arguments, enter interactive mode
 
 	FILE *src_file = fopen(argv[1], "r");
 	if (errno)

@@ -8,6 +8,7 @@
 #include <string.h>
 
 #include "fine.h"
+#include "interactive.h"
 
 #endif // APP_H_INCLUDED
 

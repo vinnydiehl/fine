@@ -9,7 +9,7 @@ INSTALL = /usr/bin
 
 # Output Files
 EXE = $(BINDIR)/$(NAME)
-OBJ = app.o fine.o functions.o globals.o
+OBJ = fine.o functions.o globals.o interactive.o main.o
 OPATHS = $(addprefix $(OBJDIR)/,$(OBJ))
 
 # Compiler
@@ -33,17 +33,20 @@ configure:
 $(EXE): $(OPATHS)
 	$(CC) $(LDFLAGS) $(OPATHS) -o $@
 
-$(OBJDIR)/app.o: app.h
-	$(CC) $(CFLAGS) app.c
-
-$(OBJDIR)/fine.o: fine.h
+$(OBJDIR)/fine.o: fine.h functions.h globals.h
 	$(CC) $(CFLAGS) fine.c
 
-$(OBJDIR)/functions.o: functions.h
+$(OBJDIR)/functions.o: functions.h globals.h
 	$(CC) $(CFLAGS) functions.c
 
 $(OBJDIR)/globals.o: globals.h
 	$(CC) $(CFLAGS) globals.c
+
+$(OBJDIR)/interactive.o: fine.h interactive.h
+	$(CC) $(CFLAGS) interactive.c
+
+$(OBJDIR)/main.o: fine.h interactive.h main.h
+	$(CC) $(CFLAGS) main.c
 
 clean:
 	mkdir -p $(OBJDIR) && rm -r $(OBJDIR)

@@ -40,9 +40,9 @@ parse_sexp(char *src)
 		// eval() currently modifies the list in place for the sake of efficiency
 		// but this interferes with reporting, so duplicate it when debugging.
 #if DEBUG
-                eval(strdup(list));
+		eval(strdup(list));
 #else
-                eval(list);
+		eval(list);
 #endif
 
 		eval_len = strlen(evaluation);

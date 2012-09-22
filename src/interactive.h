@@ -9,4 +9,3 @@ void interactive(void);
 char* readline(void);
 
 #endif // INTERACTIVE_H_INCLUDED
-

@@ -11,4 +11,3 @@
 #include "interactive.h"
 
 #endif // APP_H_INCLUDED
-

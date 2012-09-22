@@ -17,4 +17,3 @@ void parse_sexp(char*);
 void debug(char*, regmatch_t, char*);
 
 #endif // FINE_H_INCLUDED
-

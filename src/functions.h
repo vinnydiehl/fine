@@ -18,4 +18,3 @@ char* eval(char* list);
 typedef void (*function)();
 
 #endif // FUNCTIONS_H_INCLUDED
-

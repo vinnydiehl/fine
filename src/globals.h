@@ -7,4 +7,3 @@
 extern char evaluation[128];
 
 #endif // GLOBALS_H_INCLUDED
-

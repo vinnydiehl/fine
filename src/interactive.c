@@ -1,56 +1,59 @@
 #include "interactive.h"
 
-void
-interactive(void)
+void interactive(void)
 {
-	/* Run Interactive Fine. */
+    /* Run Interactive Fine. */
 
-	while (1) {
-		printf(">>> ");
-		char *input = readline();
+    while (1)
+    {
+        printf(">>> ");
+        char *input = readline();
 
-		if (strcmp(input, "quit\n") == 0)
-			break;
+        if (strcmp(input, "quit\n") == 0)
+            break;
 
-		parse_sexp(input);
-		printf("\n");
-	}
+        parse_sexp(input);
+        printf("\n");
+    }
 }
 
-char*
-readline(void)
+char* readline(void)
 {
-	/* Read in a line from stdin. */
+    /* Read in a line from stdin. */
 
-	char *line = malloc(100), *linep = line;
-	size_t lenmax = 100, len = lenmax;
-	int c;
+    char *line = malloc(100), *linep = line;
+    size_t lenmax = 100, len = lenmax;
+    int c;
 
-	if (line == NULL)
-		return NULL;
+    if (line == NULL)
+        return NULL;
 
-	while (1) {
-		c = fgetc(stdin);
-		if (c == EOF)
-			break;
+    while (1)
+    {
+        c = fgetc(stdin);
 
-		if (--len == 0) {
-			char *linen = realloc(linep, lenmax *= 2);
-			len = lenmax;
+        if (c == EOF)
+            break;
 
-			if (linen == NULL) {
-				free(linep);
-				return NULL;
-			}
-			line = linen + (line - linep);
-			linep = linen;
-		}
+        if (--len == 0)
+        {
+            char *linen = realloc(linep, lenmax *= 2);
+            len = lenmax;
 
-		if ((*line++ = c) == '\n')
-			break;
-	}
+            if (linen == NULL)
+            {
+                free(linep);
+                return NULL;
+            }
 
-	*line = '\0';
-	return linep;
+            line = linen + (line - linep);
+            linep = linen;
+        }
+
+        if ((*line++ = c) == '\n')
+            break;
+    }
+
+    *line = '\0';
+    return linep;
 }
-
